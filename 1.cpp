@@ -20,6 +20,14 @@ void scalarMatrixAdditon(int **arr, int row, int col);
 void additionOfTwomatrix(int **arr, int **arr2, int row, int col);
 void inputOf2matrix(int **arr2, int &row, int &col);
 void scalerMatrixSubscription(int **arr, int row, int col);
+void subtractionOfTwomatrix(int **arr, int **arr2, int row, int col);
+void scalerMatrixMultipliocation(int **arr, int row, int col);
+void multiplicationOfTwomatrix(int **arr, int **arr2, int row, int col);
+void scalerMatrixDivison(int **arr, int row, int col);
+void transportOfMatrixIs(int **arr, int row, int col);
+void inputForMatrix(int **arr, int row, int col);
+void outputForMatrix(int **arr, int row, int col);
+int determinationOfMatrix(int **arr, int row);
 void mainMenu();
 int main()
 {
@@ -116,6 +124,51 @@ int main()
             scalerMatrixSubscription(arr, row, col);
             output(arr, row, col);
         }
+
+        if (selectOption == 11)
+        {
+            input(arr, row, col);
+            output(arr, row, col);
+            inputOf2matrix(arr2, row, col);
+            output(arr, row, col);
+            subtractionOfTwomatrix(arr, arr2, row, col);
+        }
+        if (selectOption == 12)
+        {
+            input(arr, row, col);
+            scalerMatrixMultipliocation(arr, row, col);
+            output(arr, row, col);
+        }
+        if (selectOption == 13)
+        {
+            input(arr, row, col);
+            output(arr, row, col);
+            inputOf2matrix(arr2, row, col);
+            output(arr, row, col);
+            multiplicationOfTwomatrix(arr, arr2, row, col);
+        }
+        if (selectOption == 14)
+        {
+            input(arr, row, col);
+            scalerMatrixDivison(arr, row, col);
+            output(arr, row, col);
+        }
+        if (selectOption == 15)
+        {
+            input(arr, row, col);
+            output(arr, row, col);
+            transportOfMatrixIs(arr, row, col);
+        }
+        if (selectOption == 16)
+        {
+
+            cout << " ENTER A VALUE OF ROW : ";
+            cin >> row;
+            col = row;
+            inputForMatrix(arr, row, col);
+            outputForMatrix(arr, row, col);
+            determinationOfMatrix(arr, row);
+        }
     }
 
     return 0;
@@ -209,14 +262,16 @@ void whatTypeOfuserInputSelected(int selectOption, int **arr, int &row, int &col
             ifstream readFromFile;
             cout << "Enter the Name of File: ";
             cin >> filename;
-            readFromFile.open(filename, ifstream::in);
+            readFromFile.open(filename, ios::in);
             if (!readFromFile)
             {
                 cout << endl
                      << "FILE DOESN'T EXIST OR ACCESS DENIED!";
+
+                // exit(0);
             }
 
-            while (readFromFile >> noskipws >> ch)
+            while (readFromFile.get(ch))
             {
                 if (ch == '\n')
                 {
@@ -228,30 +283,37 @@ void whatTypeOfuserInputSelected(int selectOption, int **arr, int &row, int &col
                 }
                 tot++;
             }
+            // cout << "total spaces: " << tot_spaces << endl;
+            // cout << "total words: " << tot << endl;
+            // cout << "total characters: " << tot - tot_spaces << endl;
+            // system("pause");
+            readFromFile.close();
+            readFromFile.open(filename, ios::in);
             while (!readFromFile.eof())
             {
                 readFromFile.getline(str, 1000);
                 tot_lines++;
             }
-            tot_lines++;
+
             readFromFile.close();
 
-            cout << endl
-                 << "Total Number of Lines = " << tot_lines;
-            cout << endl;
-            cout << endl
-                 << "Total Number of Elements = " << tot;
-            cout << endl;
-            cout << endl
-                 << "Total Number of tot_spaces = " << tot_spaces;
-            cout << endl;
+            // cout << endl
+            //      << "Total Number of Lines = " << tot_lines;
+            // cout << endl;
+            // cout << endl
+            //      << "Total Number of Elements = " << tot;
+            // cout << endl;
+            // cout << endl
+            //      << "Total Number of tot_spaces = " << tot_spaces;
+            // cout << endl;
 
             row = tot_lines;
             col = tot - tot_spaces;
-            cout << " ROW IS THIS : " << row;
-            cout << endl;
-            cout << " col IS THIS : " << col;
-            cout << endl;
+            // cout << " ROW IS THIS : " << row;
+            // cout << endl;
+            // cout << " col IS THIS : " << col;
+            // cout << endl;
+            readFromFile.open(filename, ios::in);
             inputFromFileProcess(arr, row, col, readFromFile);
 
             ofstream writeIntoFile;
@@ -311,7 +373,7 @@ void input(int **arr, int &row, int &col)
 void inputOf2matrix(int **arr2, int &row, int &col)
 {
     cout << "\n===============================================================================\n";
-    cout << "\t\t\t\t ENTER THE VALUES \n";
+    cout << "\t\t\t\t ENTER THE VALUES ";
     cout << "\n===============================================================================\n";
 
     for (int i = 0; i < row; i++)
@@ -353,14 +415,7 @@ void inputFromFileProcess(int **arr, int row, int col, ifstream &readFromFile)
             readFromFile >> arr[i][j];
         }
     }
-    for (int i = 0; i < row; i++)
-    {
-        for (int j = 0; j < col; j++)
-        {
-            cout << arr[i][j] << "  ";
-        }
-        cout << endl;
-    }
+
     cout << "\n----------------------------------------------------------------------------------------\n";
     cout << "\t\t\t\tREAD FILE SUCCESSFULLY";
     cout << "\n----------------------------------------------------------------------------------------\n";
@@ -532,4 +587,157 @@ void scalerMatrixSubscription(int **arr, int row, int col)
             arr[i][j] = arr[i][j] - sub;
         }
     }
+}
+
+void subtractionOfTwomatrix(int **arr, int **arr2, int row, int col)
+{
+
+    int sub[10][10] = {0, 0};
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            sub[i][j] = arr[i][j] - (arr2[i][j]);
+        }
+    }
+    cout << "\n SUBTRACTION OF TWO MATRIX IS : \n";
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            cout << "A[" << i << "][" << j << "] : ";
+            cout << sub[i][j] << "  ";
+        }
+        cout << endl;
+    }
+}
+
+void scalerMatrixMultipliocation(int **arr, int row, int col)
+{
+    int mul = 0;
+    cout << "ENTER NUMBER FOR SCALAR MATRIX MULTIPLICATION :";
+    cin >> mul;
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            arr[i][j] = arr[i][j] * mul;
+        }
+    }
+}
+void multiplicationOfTwomatrix(int **arr, int **arr2, int row, int col)
+{
+
+    int mul[10][10] = {0, 0};
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            mul[i][j] = arr[i][j] * (arr2[i][j]);
+        }
+    }
+    cout << "\n SUBTRACTION OF TWO MATRIX IS : \n";
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            cout << "A[" << i << "][" << j << "] : ";
+            cout << mul[i][j] << "  ";
+        }
+        cout << endl;
+    }
+}
+void scalerMatrixDivison(int **arr, int row, int col)
+{
+    int sub = 0;
+    cout << "ENTER NUMBER FOR SCALAR MATRIX SUBTRACTION :";
+    cin >> sub;
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            arr[i][j] = arr[i][j] / sub;
+        }
+    }
+}
+void transportOfMatrixIs(int **arr, int row, int col)
+{
+
+    for (int i = 0; i < col; i++)
+    {
+        for (int j = 0; j < row; j++)
+        {
+            cout << "A[" << i << "][" << j << "] : ";
+            cout << arr[j][i] << "  ";
+        }
+        cout << endl;
+    }
+}
+void inputForMatrix(int **arr, int row, int col)
+{
+    for (int i = 0; i < row; i++)
+    {
+        arr[i] = new int[col];
+    }
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            cout << "A[" << i << "][" << j << "] : ";
+            cin >> arr[i][j];
+        }
+    }
+}
+void outputForMatrix(int **arr, int row, int col)
+{
+
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            cout << "[" << i << "][" << j << "] : ";
+            cout << arr[i][j];
+        }
+        cout << endl;
+    }
+}
+int determinationOfMatrix(int **arr, int row)
+{
+    int plusMinValue = 1;
+    int m = 0, n = 0;
+    int **temp = nullptr;
+    temp = new int *[row];
+    for (int i = 0; i < row; i++)
+    {
+        temp[i] = new int[row];
+    }
+
+    double derterminate = 0;
+    for (int k = 0; k < row; k++)
+    {
+        m = 0, n = 0;
+        for (int i = 0; i < row; i++)
+        {
+            for (int j = 0; j < row; j++)
+            {
+                temp[i][j] = 0;
+                if (i != 0 && j != k)
+                {
+                    temp[m][n] = arr[i][j];
+                    if (n < row - 2)
+                    {
+                        n++;
+                    }
+                    else
+                    {
+                        n = 0;
+                        m++;
+                    }
+                }
+            }
+        }
+        derterminate = derterminate + plusMinValue * (arr[0][k] * determinationOfMatrix(temp, row - 1));
+        plusMinValue = -1 * plusMinValue;
+    }
+    cout << derterminate;
 }
