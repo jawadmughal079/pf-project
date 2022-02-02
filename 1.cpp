@@ -27,6 +27,7 @@ void scalerMatrixDivison(int **arr, int row, int col);
 void transportOfMatrixIs(int **arr, int row, int col);
 void inputForMatrix(int **arr, int row, int col);
 void outputForMatrix(int **arr, int row, int col);
+void deleteMemeroy(int **arr, int row, int col);
 int determinationOfMatrix(int **arr, int row);
 void mainMenu();
 int main()
@@ -71,44 +72,52 @@ int main()
         {
             input(arr, row, col);
             sumOfMatrixIs(arr, row, col);
+            deleteMemeroy(arr, row, col);
         }
         if (selectOption == 2)
         {
             input(arr, row, col);
             productOfMatrixIs(arr, row, col);
+            deleteMemeroy(arr, row, col);
         }
         if (selectOption == 3)
         {
             input(arr, row, col);
             rowWiseProduct(arr, row, col);
+            deleteMemeroy(arr, row, col);
         }
         if (selectOption == 4)
         {
             input(arr, row, col);
             colWiseProduct(arr, row, col);
+            deleteMemeroy(arr, row, col);
         }
         if (selectOption == 5)
         {
             input(arr, row, col);
             averageOrWholeMatrix(arr, row, col);
+            deleteMemeroy(arr, row, col);
         }
         if (selectOption == 6)
         {
             input(arr, row, col);
             shortingIn2DArrayRowWise(arr, row, col);
             output(arr, row, col);
+            deleteMemeroy(arr, row, col);
         }
         if (selectOption == 7)
         {
             input(arr, row, col);
             shortingIn2DArrayColumnWise(arr, row, col);
             output(arr, row, col);
+            deleteMemeroy(arr, row, col);
         }
         if (selectOption == 8)
         {
             input(arr, row, col);
             scalarMatrixAdditon(arr, row, col);
             output(arr, row, col);
+            deleteMemeroy(arr, row, col);
         }
         if (selectOption == 9)
         {
@@ -117,12 +126,15 @@ int main()
             inputOf2matrix(arr2, row, col);
             output(arr, row, col);
             additionOfTwomatrix(arr, arr2, row, col);
+            deleteMemeroy(arr, row, col);
+            deleteMemeroy(arr2, row, col);
         }
         if (selectOption == 10)
         {
             input(arr, row, col);
             scalerMatrixSubscription(arr, row, col);
             output(arr, row, col);
+            deleteMemeroy(arr, row, col);
         }
 
         if (selectOption == 11)
@@ -132,12 +144,15 @@ int main()
             inputOf2matrix(arr2, row, col);
             output(arr, row, col);
             subtractionOfTwomatrix(arr, arr2, row, col);
+            deleteMemeroy(arr, row, col);
+            deleteMemeroy(arr2, row, col);
         }
         if (selectOption == 12)
         {
             input(arr, row, col);
             scalerMatrixMultipliocation(arr, row, col);
             output(arr, row, col);
+            deleteMemeroy(arr, row, col);
         }
         if (selectOption == 13)
         {
@@ -146,28 +161,35 @@ int main()
             inputOf2matrix(arr2, row, col);
             output(arr, row, col);
             multiplicationOfTwomatrix(arr, arr2, row, col);
+            deleteMemeroy(arr, row, col);
+            deleteMemeroy(arr2, row, col);
         }
         if (selectOption == 14)
         {
             input(arr, row, col);
             scalerMatrixDivison(arr, row, col);
             output(arr, row, col);
+            deleteMemeroy(arr, row, col);
         }
         if (selectOption == 15)
         {
             input(arr, row, col);
             output(arr, row, col);
             transportOfMatrixIs(arr, row, col);
+            deleteMemeroy(arr, row, col);
         }
         if (selectOption == 16)
         {
-
+            int ans = 0;
             cout << " ENTER A VALUE OF ROW : ";
             cin >> row;
             col = row;
             inputForMatrix(arr, row, col);
             outputForMatrix(arr, row, col);
-            determinationOfMatrix(arr, row);
+            ans = determinationOfMatrix(arr, row);
+            cout << " DETERMINATED OF MATRIXIS THIS : " << ans;
+            cout << endl;
+            deleteMemeroy(arr, row, col);
         }
     }
 
@@ -739,5 +761,13 @@ int determinationOfMatrix(int **arr, int row)
         derterminate = derterminate + plusMinValue * (arr[0][k] * determinationOfMatrix(temp, row - 1));
         plusMinValue = -1 * plusMinValue;
     }
-    cout << derterminate;
+    return derterminate;
+}
+void deleteMemeroy(int **arr, int row, int col)
+{
+    for (int i = 0; i < row; i++)
+    {
+        delete[] arr[i];
+    }
+    delete[] arr;
 }
